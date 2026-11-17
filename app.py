@@ -14,7 +14,8 @@ from engine.calibrate import validation_loop
 from engine.scenarios import spec_for
 from engine.sim import simulate
 from engine.kpis import summarize, samples, quit_ends
-from engine.report import pdf_figure, pretty, STATUS, mermaid_html
+from engine.report import pdf_figure, pretty, STATUS, mermaid_html, build as build_report, add_section
+import datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 st.set_page_config(page_title="Process simulation", layout="wide", page_icon="🏥")
@@ -137,7 +138,15 @@ st.markdown(f"# {html.escape(c.get('title', 'Process simulation'))}")
 st.markdown(f'<div class="chips"><span>{log.case_id.nunique():,} cases</span><span>{log.t.max() / 1440:.0f} days of data</span>'
             f'<span>{og("cases_per_day"):.0f} cases / day</span><span>{log.activity.nunique()} activities</span>'
             f'<span>{len(spec["pools"])} resources</span></div>', unsafe_allow_html=True)
-tab_map, tab_val, tab_sc = st.tabs(["1 · Process map", "2 · Validate", "3 · What-if"])
+tab_map, tab_val, tab_sc, tab_rep = st.tabs(["1 · Process map", "2 · Validate", "3 · What-if", "4 · Report"])
+rkey = f"rep::{choice}"
+
+def make_report(val, summ, logs, kind):
+    """Build the report from a validation run in the app and keep only the HTML (the simulated logs are large)."""
+    with st.spinner("Building the report"):
+        note = (f"{kind} run in the app on {datetime.datetime.now():%Y-%m-%d %H:%M}: {reps} replications × {days} days "
+                f"(+{warmup} warm-up), target ±{tol:.0%}.")
+        st.session_state[rkey] = (build_report(None, c.get("title", choice), log, classes, spec, P, val, summ, logs, note=note), note)
 
 # ---------------------------------------------------------------- 1 process map
 with tab_map:
@@ -170,12 +179,14 @@ with tab_val:
     vkey = f"val::{choice}::{reps}::{days}::{warmup}::{tol}"
     if run_loop:
         with st.spinner("Validation loop: tuning and re-validating (a few minutes)"):
-            Pn, val, summ, hist, _ = validation_loop(P, spec, log, classes, tol, reps=reps, days=days, warmup_days=warmup, log=lambda m: None)
-        st.session_state[key] = P = Pn; st.session_state[vkey] = (val, summ, hist)
+            Pn, val, summ, hist, vlogs = validation_loop(P, spec, log, classes, tol, reps=reps, days=days, warmup_days=warmup, log=lambda m: None)
+        st.session_state[key] = P = Pn; summ["loop_history"] = hist; st.session_state[vkey] = (val, summ, hist)
+        make_report(val, summ, vlogs, "Validation loop"); del vlogs
     elif run_val:
         with st.spinner(f"Running {reps} replications"):
-            val, summ, _ = validate(P, spec, log, classes, reps, days, warmup, tol=tol, keep_logs=True)
+            val, summ, vlogs = validate(P, spec, log, classes, reps, days, warmup, tol=tol, keep_logs=True)
         st.session_state[vkey] = (val, summ, None)
+        make_report(val, summ, vlogs, "Validation"); del vlogs
     if vkey in st.session_state:
         val, summ, vhist = st.session_state[vkey]; n = int((val.status != "INFO").sum())
         cnt = lambda s_: int((val.status == s_).sum())
@@ -335,3 +346,47 @@ with tab_sc:
         st.dataframe(pd.DataFrame(tab), hide_index=True, width="stretch")
         if st.button("Clear what-if runs", key=f"clear_{choice}"):
             st.session_state[hkey] = []; st.session_state.pop(f"sel_{choice}", None); st.rerun()
+
+# ---------------------------------------------------------------- 4 report
+def whatif_section(hist):
+    """The what-if runs as a report section: today and each run, headline measures with the change from today."""
+    def u(v, unit): return plain(fmt(v, unit))
+    head = "".join(f"<th>{html.escape(l)}</th>" for l, *_ in HL)
+    rows = []
+    for i, x in enumerate([None] + hist):
+        runs = hist[0]["base"] if x is None else x["scen"]; M = per_run(runs).mean(axis=1)
+        Bm = per_run(hist[0]["base"] if x is None else x["base"]).mean(axis=1)
+        cells = []
+        for l, k, seg, s, unit in HL:
+            v, b = float(M.get((k, seg, s), np.nan)), float(Bm.get((k, seg, s), np.nan))
+            ch = "" if x is None or not abs(b) > 1e-9 else f" <span class=sd>({100 * (v - b) / b:+.0f}%)</span>"
+            cells.append(f"<td>{u(v, unit)}{ch}</td>")
+        name = "Today (simulated)" if x is None else f"{i}: {html.escape(x['label'])}"
+        rows.append(f"<tr><td>{name}</td>{''.join(cells)}</tr>")
+    return (f"<h2>What-if runs</h2><p class=muted>Each run changes the listed levers together and is compared with today, both simulated with "
+            f"{len(hist[0]['base'])} replications. Percentages are the change from today; small changes in measures that swing a lot "
+            f"between runs (boarding) may be noise.</p><div class=wrap><table><thead><tr><th>Run</th>{head}</tr></thead><tbody>{''.join(rows)}</tbody></table></div>")
+
+with tab_rep:
+    step("<b>One page to share.</b> The report combines the process map, queues, validation (colour-coded against the target), "
+         "the validation loop, your what-if runs, and log-vs-simulation histograms. Running <i>Validate</i> in this session rebuilds it "
+         "from your run; otherwise the saved report for this case is shown. Download it to email or attach it.")
+    saved = os.path.join(c["dir"], "results", "report.html")
+    if rkey in st.session_state:
+        doc, note = st.session_state[rkey]; src = note
+    elif os.path.exists(saved):
+        doc = open(saved).read(); src = (f"Saved report (built offline with the validation loop; file last updated "
+                                         f"{datetime.datetime.fromtimestamp(os.path.getmtime(saved)):%Y-%m-%d %H:%M}). Run Validate to rebuild it from this session.")
+    else:
+        doc = None
+    if doc is None:
+        st.info("No report yet for this log. Run **2 · Validate** first.")
+    else:
+        hist = st.session_state.get(hkey, [])
+        inc = st.toggle(f"Include my what-if runs ({len(hist)})", value=bool(hist), disabled=not hist, key=f"inc_{choice}_{len(hist)}")
+        if inc and hist: doc = add_section(doc, whatif_section(hist))
+        a, b = st.columns([3, 1])
+        a.caption(src)
+        fname = f"{os.path.basename(c['dir'])}_report_{datetime.date.today():%Y%m%d}.html"
+        b.download_button("Download report (HTML)", doc, file_name=fname, mime="text/html", type="primary", width="stretch")
+        st.iframe(doc, height=1100)

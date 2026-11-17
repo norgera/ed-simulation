@@ -95,7 +95,9 @@ def _df_html(df, fmt="{:,.2f}"):
         h += "<tr>" + "".join(f"<td>{fmt.format(x) if isinstance(x, (float, np.floating)) and not pd.isna(x) else html.escape(str(x))}</td>" for x in r) + "</tr>"
     return h + "</tbody></table>"
 
-def build(path, name, log, classes, spec, P, val, summ, sim_logs):
+def build(path, name, log, classes, spec, P, val, summ, sim_logs, extra="", note=""):
+    """Write the report to `path` (when given) and return the HTML. `extra`: HTML inserted after validation (the app adds its
+    what-if runs); `note`: a line under the title (e.g. the run settings)."""
     tol = summ.get("tol", 0.05); terminals = set(P["terminals"])
     mm = merged_map(log); chk = summ["checks"]; n_pass = int((val.status == "PASS").sum())
     obs_s = samples(log, classes, spec, terminals)
@@ -129,6 +131,7 @@ th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}th
 <style>{css}</style></head><body>
 <h1>{html.escape(name)}: simulation report</h1>
 <p class=muted>Event log → process map → fitted simulation → validation. Every measure is computed by the same code on the log and on the simulation.</p>
+{f'<p class=muted>{html.escape(note)}</p>' if note else ''}
 <div class=tiles>{tiles}</div>
 <h2>Process map</h2><p class=muted>Start and end events of the same step are merged into one box, which shows the median and 90th percentile time in that step.
 Arrows show how many cases take that path and the average wait before the next step (amber over 15 min, red over 60 min).</p>
@@ -144,7 +147,14 @@ Arrows show how many cases take that path and the average wait before the next s
 · <span class=pill style="color:{STATUS['FAIL'][0]};background:{STATUS['FAIL'][1]}">fail</span> a real gap.</p>
 <div class=wrap>{status_table(val, tol)}</div>
 {loop_html}
+{extra}
 <h2>Distributions: log vs simulation</h2><p class=muted>Histograms scaled to the same area (probability density). Filled: log. Line: simulation, all runs pooled.</p>
 <div class=grid>{"".join(figs)}</div>
 </body></html>"""
-    open(path, "w").write(doc)
+    if path: open(path, "w").write(doc)
+    return doc
+
+def add_section(doc, section_html):
+    """Insert a section into an existing report, before the distributions (or at the end)."""
+    mark = "<h2>Distributions"
+    return doc.replace(mark, section_html + "\n" + mark, 1) if mark in doc else doc.replace("</body>", section_html + "</body>", 1)
