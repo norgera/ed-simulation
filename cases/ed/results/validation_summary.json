@@ -1,0 +1,55 @@
+{
+ "within_5pct": 20,
+ "within_10pct": 26,
+ "within_20pct": 38,
+ "checks": 46,
+ "sim_pool_utilization": {
+  "triage nurse": 0.19182170419280564,
+  "ED bed": 0.7027447527092074,
+  "physician": 0.8629452255505887,
+  "ward bed": 0.9146141828153355
+ },
+ "tol": 0.05,
+ "loop_history": [
+  {
+   "round": 0,
+   "passed": 14,
+   "checks": 46,
+   "within_10pct": 18,
+   "tuned": {
+    "visit:physician": 0.3,
+    "hold:ward bed": 6056.7
+   }
+  },
+  {
+   "round": 1,
+   "passed": 18,
+   "checks": 46,
+   "within_10pct": 31,
+   "tuned": {
+    "visit:physician": 0.24169921875,
+    "hold:ward bed": 6047.23640625
+   }
+  },
+  {
+   "round": 2,
+   "passed": 20,
+   "checks": 46,
+   "within_10pct": 26,
+   "tuned": {
+    "visit:physician": 0.25400390625,
+    "hold:ward bed": 6018.8899855957025
+   }
+  },
+  {
+   "round": 3,
+   "passed": 11,
+   "checks": 46,
+   "within_10pct": 15,
+   "tuned": {
+    "visit:physician": 0.24873046875,
+    "hold:ward bed": 6141.148688428115
+   }
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "start": "Arrival",
+ "notes": [
+  "Resource counts and shifts are hospital-supplied inputs (an event log cannot show them). The ward has no release event in an ED log, so it is an external hold: stay length is an input."
+ ],
+ "pools": [
+  {
+   "name": "triage nurse",
+   "acquire": "Triage start",
+   "release": "Triage end",
+   "capacity": 3,
+   "shifts": [
+    [
+     7,
+     3
+    ],
+    [
+     15,
+     3
+    ],
+    [
+     23,
+     2
+    ]
+   ],
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "ED bed",
+   "acquire": "ED bed assigned",
+   "release": "Departure from ED",
+   "capacity": 30,
+   "shifts": null,
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "physician",
+   "acquire": "Physician initial assessment start",
+   "release": "Physician initial assessment end",
+   "capacity": 4,
+   "shifts": [
+    [
+     7,
+     4
+    ],
+    [
+     15,
+     4
+    ],
+    [
+     23,
+     2
+    ]
+   ],
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "ward bed",
+   "acquire": "Inpatient bed assigned",
+   "release": null,
+   "capacity": 93,
+   "shifts": null,
+   "priority_by_class": false,
+   "hold": {
+    "mean": 6056.7,
+    "cv": 0.9,
+    "initial_occupancy": 0.85
+   }
+  }
+ ],
+ "visits": [
+  {
+   "pool": "physician",
+   "before": "Disposition decision",
+   "scale": 0.3,
+   "note": "reassessment work the log does not show; share of the gap before the decision, calibrated"
+  }
+ ]
+}

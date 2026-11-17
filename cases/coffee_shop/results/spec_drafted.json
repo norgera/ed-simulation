@@ -1,0 +1,27 @@
+{
+ "start": "Arrive",
+ "class_col": null,
+ "pools": [
+  {
+   "name": "barista",
+   "acquire": "Prep start",
+   "release": "Prep end",
+   "capacity": 2,
+   "shifts": null,
+   "priority_by_class": false,
+   "hold": null,
+   "note": "drafted: capacity = peak overlap seen in the log"
+  },
+  {
+   "name": "cashier",
+   "acquire": "Order start",
+   "release": "Order end",
+   "capacity": 1,
+   "shifts": null,
+   "priority_by_class": false,
+   "hold": null,
+   "note": "drafted: capacity = peak overlap seen in the log"
+  }
+ ],
+ "notes": []
+}

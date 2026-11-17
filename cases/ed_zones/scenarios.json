@@ -1,0 +1,58 @@
+[
+ {
+  "name": "Yellow stretchers 22 -> 26",
+  "capacity_set": {
+   "yellow stretcher": 26
+  }
+ },
+ {
+  "name": "Blue chairs 14 -> 10",
+  "capacity_set": {
+   "blue chair": 10
+  }
+ },
+ {
+  "name": "Fast-track provider 2 all day (07-23), 1 at night",
+  "capacity_set": {
+   "fast-track provider": [
+    [
+     7,
+     2
+    ],
+    [
+     23,
+     1
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Main physicians 4 / 4 / 2",
+  "capacity_set": {
+   "physician": [
+    [
+     7,
+     4
+    ],
+    [
+     15,
+     4
+    ],
+    [
+     23,
+     2
+    ]
+   ]
+  }
+ },
+ {
+  "name": "Inpatient stay -10%",
+  "hold_mult": {
+   "ward bed": 0.9
+  }
+ },
+ {
+  "name": "Demand +10%",
+  "arrival_mult": 1.1
+ }
+]

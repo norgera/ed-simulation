@@ -1,0 +1,6 @@
+{
+ "title": "Coffee shop",
+ "log": "data/coffee_shop.csv",
+ "days": 60,
+ "warmup_days": 10
+}

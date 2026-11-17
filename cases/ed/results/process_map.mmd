@@ -1,0 +1,62 @@
+flowchart LR
+  classDef proc fill:#e8f1f8,stroke:#1f5f8b,color:#10212b
+  classDef event fill:#ffffff,stroke:#8a9895,color:#10212b
+  classDef term fill:#f2f2f2,stroke:#555,color:#10212b
+  p0(["Arrival<br/>55,164"])
+  class p0 event
+  p1["Triage<br/>55,164<br/>median 4.5 min · p90 8.2 min"]
+  class p1 proc
+  p2["ED bed assigned<br/>52,745"]
+  class p2 event
+  p3["Physician initial assessment<br/>52,745<br/>median 16.0 min · p90 33.9 min"]
+  class p3 proc
+  p4["Disposition decision<br/>52,745"]
+  class p4 event
+  p5[["Departure from ED<br/>52,745"]]
+  class p5 term
+  p6["Boarding<br/>7,556<br/>median 0.0 min · p90 11.7 h"]
+  class p6 proc
+  p7["Imaging<br/>17,598<br/>median 55.5 min · p90 1.8 h"]
+  class p7 proc
+  p8["Lab<br/>22,961<br/>median 1.1 h · p90 2.3 h"]
+  class p8 proc
+  p9["Consult<br/>5,912<br/>median 1.4 h · p90 3.6 h"]
+  class p9 proc
+  p10[["Left without being seen<br/>2,419"]]
+  class p10 term
+  p0 -->|"55,164 · avg wait 0.1 min"| p1
+  linkStyle 0 stroke:#5a6865,stroke-width:4.5px
+  p1 -->|"52,745 · avg wait 9.6 min"| p2
+  linkStyle 1 stroke:#5a6865,stroke-width:4.4px
+  p2 -->|"52,745 · avg wait 26.8 min"| p3
+  linkStyle 2 stroke:#d4880f,stroke-width:4.4px
+  p3 -->|"21,197 · avg wait 49.5 min"| p4
+  linkStyle 3 stroke:#d4880f,stroke-width:2.7px
+  p4 -->|"45,189 · avg wait 25.1 min"| p5
+  linkStyle 4 stroke:#d4880f,stroke-width:4.0px
+  p4 -->|"7,556 · avg wait 0.0 min"| p6
+  linkStyle 5 stroke:#5a6865,stroke-width:1.9px
+  p6 -->|"7,556 · avg wait 0.0 min"| p5
+  linkStyle 6 stroke:#5a6865,stroke-width:1.9px
+  p3 -->|"16,630 · avg wait 1.1 min"| p7
+  linkStyle 7 stroke:#5a6865,stroke-width:2.4px
+  p7 -->|"9,018 · avg wait 0.0 min"| p8
+  linkStyle 8 stroke:#5a6865,stroke-width:2.0px
+  p8 -->|"4,009 · avg wait 7.3 min"| p9
+  linkStyle 9 stroke:#5a6865,stroke-width:1.7px
+  p9 -->|"5,912 · avg wait 35.3 min"| p4
+  linkStyle 10 stroke:#d4880f,stroke-width:1.8px
+  p8 -->|"17,984 · avg wait 41.5 min"| p4
+  linkStyle 11 stroke:#d4880f,stroke-width:2.5px
+  p3 -->|"13,943 · avg wait 6.0 min"| p8
+  linkStyle 12 stroke:#5a6865,stroke-width:2.3px
+  p7 -->|"7,652 · avg wait 45.3 min"| p4
+  linkStyle 13 stroke:#d4880f,stroke-width:1.9px
+  p7 -->|"928 · avg wait 4.1 min"| p9
+  linkStyle 14 stroke:#5a6865,stroke-width:1.6px
+  p8 -->|"968 · avg wait 0.1 min"| p7
+  linkStyle 15 stroke:#5a6865,stroke-width:1.6px
+  p3 -->|"975 · avg wait 0.0 min"| p9
+  linkStyle 16 stroke:#5a6865,stroke-width:1.6px
+  p1 -->|"2,419 · avg wait 1.6 h"| p10
+  linkStyle 17 stroke:#c0392b,stroke-width:1.6px

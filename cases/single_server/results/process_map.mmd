@@ -1,0 +1,10 @@
+flowchart LR
+  classDef proc fill:#e8f1f8,stroke:#1f5f8b,color:#10212b
+  classDef event fill:#ffffff,stroke:#8a9895,color:#10212b
+  classDef term fill:#f2f2f2,stroke:#555,color:#10212b
+  p0(["Arrival<br/>43,163"])
+  class p0 event
+  p1["Service<br/>43,163<br/>median 1.4 min · p90 4.6 min"]
+  class p1 proc
+  p0 -->|"43,163 · avg wait 4.1 min"| p1
+  linkStyle 0 stroke:#5a6865,stroke-width:4.5px

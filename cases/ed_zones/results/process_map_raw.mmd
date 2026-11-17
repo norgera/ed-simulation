@@ -1,0 +1,65 @@
+flowchart LR
+  n0(["Arrival<br/>55359"])
+  n1["Triage start<br/>55359"]
+  n2["Triage end<br/>55359"]
+  n3["Disposition decision<br/>52655"]
+  n4[["Departure from ED<br/>52655"]]
+  n5["Physician initial assessment start<br/>32188"]
+  n6["Physician initial assessment end<br/>32188"]
+  n7["Lab ordered/collected<br/>22649"]
+  n8["Lab result<br/>22649"]
+  n9["Green chair assigned<br/>21341"]
+  n10["Fast-track assessment start<br/>20467"]
+  n11["Fast-track assessment end<br/>20467"]
+  n12["Blue chair assigned<br/>18261"]
+  n13["DI start<br/>17544"]
+  n14["DI result<br/>17544"]
+  n15["Yellow stretcher assigned<br/>15524"]
+  n16["Boarding start (admit request)<br/>7504"]
+  n17["Inpatient bed assigned<br/>7504"]
+  n18["Consult requested<br/>5783"]
+  n19["Consult completed<br/>5783"]
+  n20["Red stretcher assigned<br/>3080"]
+  n21[["Left without being seen<br/>2704"]]
+  n0 -->|"55359 · 0.1 min"| n1
+  n12 -->|"567 · 23.0 min"| n21
+  n12 -->|"17694 · 16.0 min"| n5
+  n16 -->|"7504 · 368.4 min"| n17
+  n19 -->|"5783 · 37.9 min"| n3
+  n18 -->|"5783 · 112.0 min"| n19
+  n14 -->|"1604 · 0.0 min"| n18
+  n14 -->|"9530 · 35.9 min"| n3
+  n14 -->|"6409 · 47.7 min"| n8
+  n13 -->|"8061 · 64.4 min"| n14
+  n13 -->|"9037 · 5.9 min"| n7
+  n3 -->|"4056 · 0.0 min"| n16
+  n3 -->|"45151 · 25.0 min"| n4
+  n3 -->|"3448 · 44.7 min"| n15
+  n11 -->|"3413 · 2.6 min"| n13
+  n11 -->|"14761 · 23.3 min"| n3
+  n11 -->|"2105 · 5.9 min"| n7
+  n10 -->|"20467 · 15.2 min"| n11
+  n9 -->|"20467 · 8.0 min"| n10
+  n9 -->|"874 · 17.3 min"| n21
+  n17 -->|"7504 · 0.0 min"| n4
+  n7 -->|"5863 · 44.4 min"| n14
+  n7 -->|"992 · 7.8 min"| n13
+  n7 -->|"15794 · 76.9 min"| n8
+  n8 -->|"3159 · 0.0 min"| n18
+  n8 -->|"3620 · 35.0 min"| n14
+  n8 -->|"15867 · 39.3 min"| n3
+  n6 -->|"832 · 0.0 min"| n18
+  n6 -->|"13136 · 0.8 min"| n13
+  n6 -->|"6714 · 42.8 min"| n3
+  n6 -->|"11506 · 5.9 min"| n7
+  n5 -->|"32188 · 21.4 min"| n6
+  n20 -->|"3080 · 3.7 min"| n5
+  n2 -->|"18261 · 3.6 min"| n12
+  n2 -->|"21341 · 1.1 min"| n9
+  n2 -->|"601 · 143.3 min"| n21
+  n2 -->|"3080 · 32.8 min"| n20
+  n2 -->|"12076 · 8.1 min"| n15
+  n1 -->|"55359 · 5.0 min"| n2
+  n15 -->|"3448 · 0.0 min"| n16
+  n15 -->|"662 · 90.6 min"| n21
+  n15 -->|"11414 · 15.9 min"| n5

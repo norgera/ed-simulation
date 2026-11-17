@@ -1,0 +1,6 @@
+{
+ "title": "Single server (textbook queue)",
+ "log": "data/single_server.csv",
+ "days": 60,
+ "warmup_days": 10
+}

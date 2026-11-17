@@ -1,0 +1,98 @@
+flowchart LR
+  classDef proc fill:#e8f1f8,stroke:#1f5f8b,color:#10212b
+  classDef event fill:#ffffff,stroke:#8a9895,color:#10212b
+  classDef term fill:#f2f2f2,stroke:#555,color:#10212b
+  p0(["Arrival<br/>55,359"])
+  class p0 event
+  p1["Triage<br/>55,359<br/>median 4.5 min · p90 8.1 min"]
+  class p1 proc
+  p2["Yellow stretcher assigned<br/>15,524"]
+  class p2 event
+  p3["Physician initial assessment<br/>32,188<br/>median 18.2 min · p90 37.6 min"]
+  class p3 proc
+  p4["Lab<br/>22,649<br/>median 1.2 h · p90 2.3 h"]
+  class p4 proc
+  p5["Disposition decision<br/>52,655"]
+  class p5 event
+  p6[["Departure from ED<br/>52,655"]]
+  class p6 term
+  p7["Green chair assigned<br/>21,341"]
+  class p7 event
+  p8["Fast-track assessment<br/>20,467<br/>median 12.9 min · p90 26.7 min"]
+  class p8 proc
+  p9["Imaging<br/>17,544<br/>median 56.2 min · p90 1.8 h"]
+  class p9 proc
+  p10["Blue chair assigned<br/>18,261"]
+  class p10 event
+  p11["Red stretcher assigned<br/>3,080"]
+  class p11 event
+  p12["Boarding<br/>7,504<br/>median 0.0 min · p90 22.8 h"]
+  class p12 proc
+  p13["Consult<br/>5,783<br/>median 1.5 h · p90 3.6 h"]
+  class p13 proc
+  p14[["Left without being seen<br/>2,704"]]
+  class p14 term
+  p0 -->|"55,359 · avg wait 0.1 min"| p1
+  linkStyle 0 stroke:#5a6865,stroke-width:4.5px
+  p1 -->|"12,076 · avg wait 8.1 min"| p2
+  linkStyle 1 stroke:#5a6865,stroke-width:2.2px
+  p2 -->|"11,414 · avg wait 15.9 min"| p3
+  linkStyle 2 stroke:#d4880f,stroke-width:2.1px
+  p3 -->|"11,506 · avg wait 5.9 min"| p4
+  linkStyle 3 stroke:#5a6865,stroke-width:2.1px
+  p4 -->|"17,799 · avg wait 43.5 min"| p5
+  linkStyle 4 stroke:#d4880f,stroke-width:2.5px
+  p5 -->|"45,151 · avg wait 25.0 min"| p6
+  linkStyle 5 stroke:#d4880f,stroke-width:3.9px
+  p3 -->|"6,714 · avg wait 42.8 min"| p5
+  linkStyle 6 stroke:#d4880f,stroke-width:1.9px
+  p1 -->|"21,341 · avg wait 1.1 min"| p7
+  linkStyle 7 stroke:#5a6865,stroke-width:2.7px
+  p7 -->|"20,467 · avg wait 8.0 min"| p8
+  linkStyle 8 stroke:#5a6865,stroke-width:2.6px
+  p8 -->|"3,413 · avg wait 2.6 min"| p9
+  linkStyle 9 stroke:#5a6865,stroke-width:1.7px
+  p9 -->|"7,598 · avg wait 38.3 min"| p5
+  linkStyle 10 stroke:#d4880f,stroke-width:1.9px
+  p1 -->|"18,261 · avg wait 3.6 min"| p10
+  linkStyle 11 stroke:#5a6865,stroke-width:2.5px
+  p10 -->|"17,694 · avg wait 16.0 min"| p3
+  linkStyle 12 stroke:#d4880f,stroke-width:2.5px
+  p3 -->|"13,136 · avg wait 0.8 min"| p9
+  linkStyle 13 stroke:#5a6865,stroke-width:2.2px
+  p1 -->|"3,080 · avg wait 32.8 min"| p11
+  linkStyle 14 stroke:#d4880f,stroke-width:1.7px
+  p11 -->|"3,080 · avg wait 3.7 min"| p3
+  linkStyle 15 stroke:#5a6865,stroke-width:1.7px
+  p9 -->|"9,038 · avg wait 0.0 min"| p4
+  linkStyle 16 stroke:#5a6865,stroke-width:2.0px
+  p5 -->|"4,056 · avg wait 0.0 min"| p12
+  linkStyle 17 stroke:#5a6865,stroke-width:1.7px
+  p12 -->|"7,504 · avg wait 0.0 min"| p6
+  linkStyle 18 stroke:#5a6865,stroke-width:1.9px
+  p9 -->|"908 · avg wait 5.0 min"| p13
+  linkStyle 19 stroke:#5a6865,stroke-width:1.5px
+  p13 -->|"5,783 · avg wait 37.9 min"| p5
+  linkStyle 20 stroke:#d4880f,stroke-width:1.8px
+  p8 -->|"14,761 · avg wait 23.3 min"| p5
+  linkStyle 21 stroke:#d4880f,stroke-width:2.3px
+  p4 -->|"3,855 · avg wait 7.4 min"| p13
+  linkStyle 22 stroke:#5a6865,stroke-width:1.7px
+  p8 -->|"2,105 · avg wait 5.9 min"| p4
+  linkStyle 23 stroke:#5a6865,stroke-width:1.6px
+  p5 -->|"3,448 · avg wait 44.7 min"| p2
+  linkStyle 24 stroke:#d4880f,stroke-width:1.7px
+  p2 -->|"3,448 · avg wait 0.0 min"| p12
+  linkStyle 25 stroke:#5a6865,stroke-width:1.7px
+  p4 -->|"995 · avg wait 0.1 min"| p9
+  linkStyle 26 stroke:#5a6865,stroke-width:1.6px
+  p7 -->|"874 · avg wait 17.3 min"| p14
+  linkStyle 27 stroke:#d4880f,stroke-width:1.5px
+  p3 -->|"832 · avg wait 0.0 min"| p13
+  linkStyle 28 stroke:#5a6865,stroke-width:1.5px
+  p2 -->|"662 · avg wait 1.5 h"| p14
+  linkStyle 29 stroke:#c0392b,stroke-width:1.5px
+  p10 -->|"567 · avg wait 23.0 min"| p14
+  linkStyle 30 stroke:#d4880f,stroke-width:1.5px
+  p1 -->|"601 · avg wait 2.4 h"| p14
+  linkStyle 31 stroke:#c0392b,stroke-width:1.5px

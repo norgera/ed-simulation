@@ -1,0 +1,10 @@
+{
+ "within_5pct": 12,
+ "within_10pct": 13,
+ "within_20pct": 13,
+ "checks": 13,
+ "sim_pool_utilization": {
+  "server": 0.6436014881010774
+ },
+ "tol": 0.05
+}

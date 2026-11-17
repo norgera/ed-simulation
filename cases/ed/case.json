@@ -1,0 +1,54 @@
+{
+ "title": "Emergency department (beds first)",
+ "log": "data/ed_event_log.csv",
+ "cases": "data/ed_cases.csv",
+ "class_col": "ctas",
+ "spec": "spec.json",
+ "params": "results/params.json",
+ "days": 120,
+ "warmup_days": 30,
+ "headline": [
+  [
+   "Time in ED, average",
+   "cycle_time_min",
+   "All",
+   "mean",
+   "min"
+  ],
+  [
+   "Time in ED, 90th percentile",
+   "cycle_time_min",
+   "All",
+   "p90",
+   "min"
+  ],
+  [
+   "Left without being seen",
+   "outcome_share_pct",
+   "Left without being seen",
+   "value",
+   "pct"
+  ],
+  [
+   "Wait for a bed, average",
+   "wait_for_ED bed_min",
+   "All",
+   "mean",
+   "min"
+  ],
+  [
+   "Wait for physician (after bed), average",
+   "wait_for_physician_min",
+   "All",
+   "mean",
+   "min"
+  ],
+  [
+   "Boarding: wait for ward bed, average",
+   "wait_for_ward bed_min",
+   "All",
+   "mean",
+   "min"
+  ]
+ ]
+}

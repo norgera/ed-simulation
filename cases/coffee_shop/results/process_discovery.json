@@ -1,0 +1,64 @@
+{
+ "n_cases": 47351,
+ "start": "Arrive",
+ "starts": {
+  "Arrive": 47351
+ },
+ "terminals": {
+  "Pickup": 42981,
+  "Walked away": 4370
+ },
+ "nodes": {
+  "Arrive": 47351,
+  "Order start": 42981,
+  "Order end": 42981,
+  "Prep start": 42981,
+  "Prep end": 42981,
+  "Pickup": 42981,
+  "Walked away": 4370
+ },
+ "edges": [
+  {
+   "activity": "Arrive",
+   "next_activity": "Order start",
+   "n": 42981,
+   "mean_gap": 0.5175174504820275,
+   "median_gap": 0.019486016670271056
+  },
+  {
+   "activity": "Arrive",
+   "next_activity": "Walked away",
+   "n": 4370,
+   "mean_gap": 0.8765588352517637,
+   "median_gap": 0.6361357666610274
+  },
+  {
+   "activity": "Order end",
+   "next_activity": "Prep start",
+   "n": 42981,
+   "mean_gap": 4.030153839811783,
+   "median_gap": 1.2854009666698403
+  },
+  {
+   "activity": "Order start",
+   "next_activity": "Order end",
+   "n": 42981,
+   "mean_gap": 0.9017553602863569,
+   "median_gap": 0.8089970166765852
+  },
+  {
+   "activity": "Prep end",
+   "next_activity": "Pickup",
+   "n": 42981,
+   "mean_gap": 0.44868878961047803,
+   "median_gap": 0.4470507666701451
+  },
+  {
+   "activity": "Prep start",
+   "next_activity": "Prep end",
+   "n": 42981,
+   "mean_gap": 2.5952579023495193,
+   "median_gap": 2.235460083320504
+  }
+ ]
+}

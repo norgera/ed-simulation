@@ -1,0 +1,52 @@
+{
+ "within_5pct": 41,
+ "within_10pct": 47,
+ "within_20pct": 57,
+ "checks": 78,
+ "sim_pool_utilization": {
+  "triage nurse": 0.1917523814912724,
+  "red stretcher": 0.2279100158465485,
+  "yellow stretcher": 0.3218877990790289,
+  "blue chair": 0.46666814164028914,
+  "green chair": 0.401177611878395,
+  "physician": 0.730086158415311,
+  "fast-track provider": 0.5909955809496473,
+  "ward bed": 0.9217058525149949
+ },
+ "tol": 0.05,
+ "loop_history": [
+  {
+   "round": 0,
+   "passed": 31,
+   "checks": 78,
+   "within_10pct": 43,
+   "tuned": {
+    "visit:fast-track provider": 0.3,
+    "visit:physician": 0.3,
+    "hold:ward bed": 6048.0
+   }
+  },
+  {
+   "round": 1,
+   "passed": 41,
+   "checks": 78,
+   "within_10pct": 47,
+   "tuned": {
+    "visit:fast-track provider": 0.29619140624999996,
+    "visit:physician": 0.27333984375,
+    "hold:ward bed": 6038.549999999999
+   }
+  },
+  {
+   "round": 2,
+   "passed": 27,
+   "checks": 78,
+   "within_10pct": 46,
+   "tuned": {
+    "visit:fast-track provider": 0.33837890625,
+    "visit:physician": 0.28037109375,
+    "hold:ward bed": 6180.0785156249985
+   }
+  }
+ ]
+}

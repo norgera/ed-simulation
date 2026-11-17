@@ -1,0 +1,31 @@
+{
+ "n_cases": 43163,
+ "start": "Arrival",
+ "starts": {
+  "Arrival": 43163
+ },
+ "terminals": {
+  "Service end": 43163
+ },
+ "nodes": {
+  "Arrival": 43163,
+  "Service start": 43163,
+  "Service end": 43163
+ },
+ "edges": [
+  {
+   "activity": "Arrival",
+   "next_activity": "Service start",
+   "n": 43163,
+   "mean_gap": 4.100338530697988,
+   "median_gap": 1.753945400007069
+  },
+  {
+   "activity": "Service start",
+   "next_activity": "Service end",
+   "n": 43163,
+   "mean_gap": 2.0149979386113905,
+   "median_gap": 1.397169899999426
+  }
+ ]
+}

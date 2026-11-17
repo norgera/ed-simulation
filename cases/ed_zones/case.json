@@ -1,0 +1,61 @@
+{
+ "title": "Emergency department (zones)",
+ "log": "data/ed_event_log.csv",
+ "cases": "data/ed_cases.csv",
+ "class_col": "ctas_zone",
+ "spec": "spec.json",
+ "params": "results/params.json",
+ "days": 120,
+ "warmup_days": 30,
+ "headline": [
+  [
+   "Time in ED, average",
+   "cycle_time_min",
+   "All",
+   "mean",
+   "min"
+  ],
+  [
+   "Time in ED, 90th percentile",
+   "cycle_time_min",
+   "All",
+   "p90",
+   "min"
+  ],
+  [
+   "Left without being seen",
+   "outcome_share_pct",
+   "Left without being seen",
+   "value",
+   "pct"
+  ],
+  [
+   "Wait for physician (after zone), average",
+   "wait_for_physician_min",
+   "All",
+   "mean",
+   "min"
+  ],
+  [
+   "Wait for fast-track provider, average",
+   "wait_for_fast-track provider_min",
+   "All",
+   "mean",
+   "min"
+  ],
+  [
+   "Wait for yellow stretcher, average",
+   "wait_for_yellow stretcher_min",
+   "All",
+   "mean",
+   "min"
+  ],
+  [
+   "Boarding: wait for ward bed, average",
+   "wait_for_ward bed_min",
+   "All",
+   "mean",
+   "min"
+  ]
+ ]
+}

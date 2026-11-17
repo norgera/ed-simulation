@@ -1,0 +1,11 @@
+[
+ {"name": "+1 physician per shift", "capacity_delta": {"physician": 1}},
+ {"name": "+4 ED beds", "capacity_delta": {"ED bed": 4}},
+ {"name": "+6 inpatient beds", "capacity_delta": {"ward bed": 6}},
+ {"name": "Inpatient stay -10%", "hold_mult": {"ward bed": 0.9}},
+ {"name": "Lab and imaging turnaround -25%", "gap_mult": {"Lab result": 0.75, "DI result": 0.75}},
+ {"name": "ED discharge process -30%", "gap_mult": {"Departure from ED": 0.7}},
+ {"name": "Demand +10%", "arrival_mult": 1.1},
+ {"name": "Combined: +1 physician, inpatient stay -10%, lab and imaging -25%", "capacity_delta": {"physician": 1}, "hold_mult": {"ward bed": 0.9}, "gap_mult": {"Lab result": 0.75, "DI result": 0.75}},
+ {"name": "Combined package under demand +10%", "capacity_delta": {"physician": 1}, "hold_mult": {"ward bed": 0.9}, "gap_mult": {"Lab result": 0.75, "DI result": 0.75}, "arrival_mult": 1.1}
+]

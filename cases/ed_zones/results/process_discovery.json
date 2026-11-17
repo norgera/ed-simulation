@@ -1,0 +1,359 @@
+{
+ "n_cases": 55359,
+ "start": "Arrival",
+ "starts": {
+  "Arrival": 55359
+ },
+ "terminals": {
+  "Departure from ED": 52655,
+  "Left without being seen": 2704
+ },
+ "nodes": {
+  "Arrival": 55359,
+  "Triage start": 55359,
+  "Triage end": 55359,
+  "Disposition decision": 52655,
+  "Departure from ED": 52655,
+  "Physician initial assessment start": 32188,
+  "Physician initial assessment end": 32188,
+  "Lab ordered/collected": 22649,
+  "Lab result": 22649,
+  "Green chair assigned": 21341,
+  "Fast-track assessment start": 20467,
+  "Fast-track assessment end": 20467,
+  "Blue chair assigned": 18261,
+  "DI start": 17544,
+  "DI result": 17544,
+  "Yellow stretcher assigned": 15524,
+  "Boarding start (admit request)": 7504,
+  "Inpatient bed assigned": 7504,
+  "Consult requested": 5783,
+  "Consult completed": 5783,
+  "Red stretcher assigned": 3080,
+  "Left without being seen": 2704
+ },
+ "edges": [
+  {
+   "activity": "Arrival",
+   "next_activity": "Triage start",
+   "n": 55359,
+   "mean_gap": 0.05478230286225356,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Blue chair assigned",
+   "next_activity": "Left without being seen",
+   "n": 567,
+   "mean_gap": 23.028697715307658,
+   "median_gap": 14.219565698585939
+  },
+  {
+   "activity": "Blue chair assigned",
+   "next_activity": "Physician initial assessment start",
+   "n": 17694,
+   "mean_gap": 16.019103951644688,
+   "median_gap": 5.744532469834667
+  },
+  {
+   "activity": "Boarding start (admit request)",
+   "next_activity": "Inpatient bed assigned",
+   "n": 7504,
+   "mean_gap": 368.3639291183695,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Consult completed",
+   "next_activity": "Disposition decision",
+   "n": 5783,
+   "mean_gap": 37.871567625959536,
+   "median_gap": 32.32366583618568
+  },
+  {
+   "activity": "Consult requested",
+   "next_activity": "Consult completed",
+   "n": 5783,
+   "mean_gap": 111.99102354990507,
+   "median_gap": 87.90037084824871
+  },
+  {
+   "activity": "DI result",
+   "next_activity": "Consult requested",
+   "n": 1604,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "DI result",
+   "next_activity": "Disposition decision",
+   "n": 9530,
+   "mean_gap": 35.862968186282444,
+   "median_gap": 28.476617393331253
+  },
+  {
+   "activity": "DI result",
+   "next_activity": "Lab ordered/collected",
+   "n": 1,
+   "mean_gap": 1.3568158907000907,
+   "median_gap": 1.3568158907000907
+  },
+  {
+   "activity": "DI result",
+   "next_activity": "Lab result",
+   "n": 6409,
+   "mean_gap": 47.722586601499835,
+   "median_gap": 35.05770771461539
+  },
+  {
+   "activity": "DI start",
+   "next_activity": "DI result",
+   "n": 8061,
+   "mean_gap": 64.37500099851968,
+   "median_gap": 55.44867708426318
+  },
+  {
+   "activity": "DI start",
+   "next_activity": "Lab ordered/collected",
+   "n": 9037,
+   "mean_gap": 5.851639800341117,
+   "median_gap": 5.4865802329732105
+  },
+  {
+   "activity": "DI start",
+   "next_activity": "Lab result",
+   "n": 446,
+   "mean_gap": 44.15693900358118,
+   "median_gap": 40.64809632849938
+  },
+  {
+   "activity": "Disposition decision",
+   "next_activity": "Boarding start (admit request)",
+   "n": 4056,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Disposition decision",
+   "next_activity": "Departure from ED",
+   "n": 45151,
+   "mean_gap": 25.003360749370863,
+   "median_gap": 20.43174941430334
+  },
+  {
+   "activity": "Disposition decision",
+   "next_activity": "Yellow stretcher assigned",
+   "n": 3448,
+   "mean_gap": 44.73450218625617,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Fast-track assessment end",
+   "next_activity": "Consult requested",
+   "n": 188,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Fast-track assessment end",
+   "next_activity": "DI start",
+   "n": 3413,
+   "mean_gap": 2.6069139359015794,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Fast-track assessment end",
+   "next_activity": "Disposition decision",
+   "n": 14761,
+   "mean_gap": 23.25245590449664,
+   "median_gap": 18.112774279376026
+  },
+  {
+   "activity": "Fast-track assessment end",
+   "next_activity": "Lab ordered/collected",
+   "n": 2105,
+   "mean_gap": 5.948053834569914,
+   "median_gap": 5.53679154580459
+  },
+  {
+   "activity": "Fast-track assessment start",
+   "next_activity": "Fast-track assessment end",
+   "n": 20467,
+   "mean_gap": 15.152133772284555,
+   "median_gap": 12.893436538724927
+  },
+  {
+   "activity": "Green chair assigned",
+   "next_activity": "Fast-track assessment start",
+   "n": 20467,
+   "mean_gap": 7.965406811991206,
+   "median_gap": 0.3912226906650176
+  },
+  {
+   "activity": "Green chair assigned",
+   "next_activity": "Left without being seen",
+   "n": 874,
+   "mean_gap": 17.270296917302975,
+   "median_gap": 7.647364516480593
+  },
+  {
+   "activity": "Inpatient bed assigned",
+   "next_activity": "Departure from ED",
+   "n": 7504,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Lab ordered/collected",
+   "next_activity": "DI result",
+   "n": 5863,
+   "mean_gap": 44.373252464542325,
+   "median_gap": 40.37304493965348
+  },
+  {
+   "activity": "Lab ordered/collected",
+   "next_activity": "DI start",
+   "n": 992,
+   "mean_gap": 7.797182693313473,
+   "median_gap": 5.623265347407141
+  },
+  {
+   "activity": "Lab ordered/collected",
+   "next_activity": "Lab result",
+   "n": 15794,
+   "mean_gap": 76.90987555815286,
+   "median_gap": 65.8664693167375
+  },
+  {
+   "activity": "Lab result",
+   "next_activity": "Consult requested",
+   "n": 3159,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Lab result",
+   "next_activity": "DI result",
+   "n": 3620,
+   "mean_gap": 35.001404667788066,
+   "median_gap": 23.866195346636232
+  },
+  {
+   "activity": "Lab result",
+   "next_activity": "DI start",
+   "n": 3,
+   "mean_gap": 29.062007493814843,
+   "median_gap": 18.31678897992242
+  },
+  {
+   "activity": "Lab result",
+   "next_activity": "Disposition decision",
+   "n": 15867,
+   "mean_gap": 39.290076027451285,
+   "median_gap": 31.84877362068073
+  },
+  {
+   "activity": "Physician initial assessment end",
+   "next_activity": "Consult requested",
+   "n": 832,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Physician initial assessment end",
+   "next_activity": "DI start",
+   "n": 13136,
+   "mean_gap": 0.7605398644899171,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Physician initial assessment end",
+   "next_activity": "Disposition decision",
+   "n": 6714,
+   "mean_gap": 42.796427619656185,
+   "median_gap": 31.5712571447948
+  },
+  {
+   "activity": "Physician initial assessment end",
+   "next_activity": "Lab ordered/collected",
+   "n": 11506,
+   "mean_gap": 5.943054160744322,
+   "median_gap": 5.503882167948177
+  },
+  {
+   "activity": "Physician initial assessment start",
+   "next_activity": "Physician initial assessment end",
+   "n": 32188,
+   "mean_gap": 21.359296821320104,
+   "median_gap": 18.198829166212818
+  },
+  {
+   "activity": "Red stretcher assigned",
+   "next_activity": "Physician initial assessment start",
+   "n": 3080,
+   "mean_gap": 3.727105931701057,
+   "median_gap": 1.724421996289493
+  },
+  {
+   "activity": "Triage end",
+   "next_activity": "Blue chair assigned",
+   "n": 18261,
+   "mean_gap": 3.566795848828155,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Triage end",
+   "next_activity": "Green chair assigned",
+   "n": 21341,
+   "mean_gap": 1.0827808354980362,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Triage end",
+   "next_activity": "Left without being seen",
+   "n": 601,
+   "mean_gap": 143.2551039732585,
+   "median_gap": 62.85808313911548
+  },
+  {
+   "activity": "Triage end",
+   "next_activity": "Red stretcher assigned",
+   "n": 3080,
+   "mean_gap": 32.778815125202506,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Triage end",
+   "next_activity": "Yellow stretcher assigned",
+   "n": 12076,
+   "mean_gap": 8.147540091121432,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Triage start",
+   "next_activity": "Triage end",
+   "n": 55359,
+   "mean_gap": 4.986812640868823,
+   "median_gap": 4.465530358313117
+  },
+  {
+   "activity": "Yellow stretcher assigned",
+   "next_activity": "Boarding start (admit request)",
+   "n": 3448,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Yellow stretcher assigned",
+   "next_activity": "Left without being seen",
+   "n": 662,
+   "mean_gap": 90.56263934418156,
+   "median_gap": 47.08499761949497
+  },
+  {
+   "activity": "Yellow stretcher assigned",
+   "next_activity": "Physician initial assessment start",
+   "n": 11414,
+   "mean_gap": 15.891722982375349,
+   "median_gap": 2.9481804966999334
+  }
+ ]
+}

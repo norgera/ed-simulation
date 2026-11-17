@@ -1,0 +1,235 @@
+{
+ "n_cases": 55164,
+ "start": "Arrival",
+ "starts": {
+  "Arrival": 55164
+ },
+ "terminals": {
+  "Departure from ED": 52745,
+  "Left without being seen": 2419
+ },
+ "nodes": {
+  "Arrival": 55164,
+  "Triage start": 55164,
+  "Triage end": 55164,
+  "ED bed assigned": 52745,
+  "Physician initial assessment start": 52745,
+  "Physician initial assessment end": 52745,
+  "Disposition decision": 52745,
+  "Departure from ED": 52745,
+  "Lab ordered/collected": 22961,
+  "Lab result": 22961,
+  "DI start": 17598,
+  "DI result": 17598,
+  "Boarding start (admit request)": 7556,
+  "Inpatient bed assigned": 7556,
+  "Consult requested": 5912,
+  "Consult completed": 5912,
+  "Left without being seen": 2419
+ },
+ "edges": [
+  {
+   "activity": "Arrival",
+   "next_activity": "Triage start",
+   "n": 55164,
+   "mean_gap": 0.06052697612361792,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Boarding start (admit request)",
+   "next_activity": "Inpatient bed assigned",
+   "n": 7556,
+   "mean_gap": 181.37690041520338,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Consult completed",
+   "next_activity": "Disposition decision",
+   "n": 5912,
+   "mean_gap": 35.271425043756565,
+   "median_gap": 31.430229451390915
+  },
+  {
+   "activity": "Consult requested",
+   "next_activity": "Consult completed",
+   "n": 5912,
+   "mean_gap": 111.29935756536685,
+   "median_gap": 86.41184434402385
+  },
+  {
+   "activity": "DI result",
+   "next_activity": "Consult requested",
+   "n": 1634,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "DI result",
+   "next_activity": "Disposition decision",
+   "n": 9619,
+   "mean_gap": 41.420106661767576,
+   "median_gap": 31.136886840802617
+  },
+  {
+   "activity": "DI result",
+   "next_activity": "Lab result",
+   "n": 6345,
+   "mean_gap": 47.496088623069454,
+   "median_gap": 34.97403378787567
+  },
+  {
+   "activity": "DI start",
+   "next_activity": "DI result",
+   "n": 8094,
+   "mean_gap": 64.05654691872233,
+   "median_gap": 54.646969937501126
+  },
+  {
+   "activity": "DI start",
+   "next_activity": "Lab ordered/collected",
+   "n": 9018,
+   "mean_gap": 5.806259839735114,
+   "median_gap": 5.452693830637145
+  },
+  {
+   "activity": "DI start",
+   "next_activity": "Lab result",
+   "n": 486,
+   "mean_gap": 45.047097511676085,
+   "median_gap": 42.63892266326002
+  },
+  {
+   "activity": "Disposition decision",
+   "next_activity": "Boarding start (admit request)",
+   "n": 7556,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Disposition decision",
+   "next_activity": "Departure from ED",
+   "n": 45189,
+   "mean_gap": 25.10850710383311,
+   "median_gap": 20.519626484427135
+  },
+  {
+   "activity": "ED bed assigned",
+   "next_activity": "Physician initial assessment start",
+   "n": 52745,
+   "mean_gap": 26.844989173448315,
+   "median_gap": 4.453890597214922
+  },
+  {
+   "activity": "Inpatient bed assigned",
+   "next_activity": "Departure from ED",
+   "n": 7556,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Lab ordered/collected",
+   "next_activity": "DI result",
+   "n": 5870,
+   "mean_gap": 43.6894479239558,
+   "median_gap": 40.178761762188515
+  },
+  {
+   "activity": "Lab ordered/collected",
+   "next_activity": "DI start",
+   "n": 961,
+   "mean_gap": 7.820201120448854,
+   "median_gap": 5.474862335715443
+  },
+  {
+   "activity": "Lab ordered/collected",
+   "next_activity": "Lab result",
+   "n": 16130,
+   "mean_gap": 76.49631817718391,
+   "median_gap": 65.29817053393344
+  },
+  {
+   "activity": "Lab result",
+   "next_activity": "Consult requested",
+   "n": 3303,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Lab result",
+   "next_activity": "DI result",
+   "n": 3634,
+   "mean_gap": 36.34320629620183,
+   "median_gap": 24.515412754451972
+  },
+  {
+   "activity": "Lab result",
+   "next_activity": "DI start",
+   "n": 7,
+   "mean_gap": 15.602061938426882,
+   "median_gap": 9.783740155748092
+  },
+  {
+   "activity": "Lab result",
+   "next_activity": "Disposition decision",
+   "n": 16017,
+   "mean_gap": 37.04005742220288,
+   "median_gap": 30.93529168760142
+  },
+  {
+   "activity": "Physician initial assessment end",
+   "next_activity": "Consult requested",
+   "n": 975,
+   "mean_gap": 0.0,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Physician initial assessment end",
+   "next_activity": "DI start",
+   "n": 16630,
+   "mean_gap": 1.073883578289738,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Physician initial assessment end",
+   "next_activity": "Disposition decision",
+   "n": 21197,
+   "mean_gap": 49.480674436018596,
+   "median_gap": 28.85801512701437
+  },
+  {
+   "activity": "Physician initial assessment end",
+   "next_activity": "Lab ordered/collected",
+   "n": 13943,
+   "mean_gap": 5.971067769899156,
+   "median_gap": 5.534185979264294
+  },
+  {
+   "activity": "Physician initial assessment start",
+   "next_activity": "Physician initial assessment end",
+   "n": 52745,
+   "mean_gap": 18.912917322995554,
+   "median_gap": 15.989390935952542
+  },
+  {
+   "activity": "Triage end",
+   "next_activity": "ED bed assigned",
+   "n": 52745,
+   "mean_gap": 9.634605293135994,
+   "median_gap": 0.0
+  },
+  {
+   "activity": "Triage end",
+   "next_activity": "Left without being seen",
+   "n": 2419,
+   "mean_gap": 94.52551728220149,
+   "median_gap": 54.93423645303119
+  },
+  {
+   "activity": "Triage start",
+   "next_activity": "Triage end",
+   "n": 55164,
+   "mean_gap": 5.014511575680824,
+   "median_gap": 4.48821600509109
+  }
+ ]
+}

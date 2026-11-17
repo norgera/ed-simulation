@@ -1,0 +1,18 @@
+{
+ "triage": [
+  3,
+  3,
+  2
+ ],
+ "physician": [
+  4,
+  4,
+  2
+ ],
+ "ed_beds": 30,
+ "di": 2,
+ "ward_beds": 93,
+ "di_scan_min": 20.0,
+ "ward_init_occ": 0.85,
+ "ward_los_cv": 0.9
+}

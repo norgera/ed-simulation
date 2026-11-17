@@ -1,0 +1,11 @@
+{
+ "within_5pct": 22,
+ "within_10pct": 22,
+ "within_20pct": 22,
+ "checks": 22,
+ "sim_pool_utilization": {
+  "barista": 0.3050903864675535,
+  "cashier": 0.2126187600013696
+ },
+ "tol": 0.05
+}

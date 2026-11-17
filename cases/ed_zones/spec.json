@@ -1,0 +1,150 @@
+{
+ "start": "Arrival",
+ "class_col": "ctas_zone",
+ "abandon": [
+  "Left without being seen"
+ ],
+ "notes": [
+  "Zone-based ED, placeholder layout until the supervisor's ideal ED process map arrives. Classes are CTAS level plus zone (e.g. '3-blue'), so each zone keeps its own path; priority comes from the CTAS number.",
+  "Space and staff counts are hospital inputs (a log cannot show them). Vertical patients use chairs; an admitted chair patient moves to a yellow stretcher, which frees the chair.",
+  "The ward has no release event in an ED log, so it is an external hold: its mean stay is tuned by the validation loop to match boarding."
+ ],
+ "pools": [
+  {
+   "name": "triage nurse",
+   "acquire": "Triage start",
+   "release": "Triage end",
+   "capacity": 3,
+   "shifts": [
+    [
+     7,
+     3
+    ],
+    [
+     15,
+     3
+    ],
+    [
+     23,
+     2
+    ]
+   ],
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "red stretcher",
+   "acquire": "Red stretcher assigned",
+   "release": "Departure from ED",
+   "capacity": 8,
+   "shifts": null,
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "yellow stretcher",
+   "acquire": "Yellow stretcher assigned",
+   "release": "Departure from ED",
+   "capacity": 22,
+   "shifts": null,
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "blue chair",
+   "acquire": "Blue chair assigned",
+   "release": [
+    "Yellow stretcher assigned",
+    "Departure from ED"
+   ],
+   "capacity": 14,
+   "shifts": null,
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "green chair",
+   "acquire": "Green chair assigned",
+   "release": [
+    "Yellow stretcher assigned",
+    "Departure from ED"
+   ],
+   "capacity": 10,
+   "shifts": null,
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "physician",
+   "acquire": "Physician initial assessment start",
+   "release": "Physician initial assessment end",
+   "capacity": 3,
+   "shifts": [
+    [
+     7,
+     3
+    ],
+    [
+     15,
+     3
+    ],
+    [
+     23,
+     2
+    ]
+   ],
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "fast-track provider",
+   "acquire": "Fast-track assessment start",
+   "release": "Fast-track assessment end",
+   "capacity": 2,
+   "shifts": [
+    [
+     7,
+     1
+    ],
+    [
+     11,
+     2
+    ],
+    [
+     21,
+     1
+    ]
+   ],
+   "priority_by_class": true,
+   "hold": null
+  },
+  {
+   "name": "ward bed",
+   "acquire": "Inpatient bed assigned",
+   "release": null,
+   "capacity": 93,
+   "shifts": null,
+   "priority_by_class": false,
+   "hold": {
+    "mean": 6048.0,
+    "cv": 0.9,
+    "initial_occupancy": 0.85
+   }
+  }
+ ],
+ "visits": [
+  {
+   "pool": "fast-track provider",
+   "before": "Disposition decision",
+   "scale": 0.3,
+   "class_match": "green$",
+   "note": "green-zone reassessment by the fast-track provider; share of the gap before the decision, calibrated"
+  },
+  {
+   "pool": "physician",
+   "before": "Disposition decision",
+   "scale": 0.3,
+   "note": "reassessment work the log does not show; share of the gap before the decision, calibrated"
+  }
+ ]
+}

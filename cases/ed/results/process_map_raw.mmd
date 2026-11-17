@@ -1,0 +1,45 @@
+flowchart LR
+  n0(["Arrival<br/>55164"])
+  n1["Triage start<br/>55164"]
+  n2["Triage end<br/>55164"]
+  n3["ED bed assigned<br/>52745"]
+  n4["Physician initial assessment start<br/>52745"]
+  n5["Physician initial assessment end<br/>52745"]
+  n6["Disposition decision<br/>52745"]
+  n7[["Departure from ED<br/>52745"]]
+  n8["Lab ordered/collected<br/>22961"]
+  n9["Lab result<br/>22961"]
+  n10["DI start<br/>17598"]
+  n11["DI result<br/>17598"]
+  n12["Boarding start (admit request)<br/>7556"]
+  n13["Inpatient bed assigned<br/>7556"]
+  n14["Consult requested<br/>5912"]
+  n15["Consult completed<br/>5912"]
+  n16[["Left without being seen<br/>2419"]]
+  n0 -->|"55164 · 0.1 min"| n1
+  n12 -->|"7556 · 181.4 min"| n13
+  n15 -->|"5912 · 35.3 min"| n6
+  n14 -->|"5912 · 111.3 min"| n15
+  n11 -->|"1634 · 0.0 min"| n14
+  n11 -->|"9619 · 41.4 min"| n6
+  n11 -->|"6345 · 47.5 min"| n9
+  n10 -->|"8094 · 64.1 min"| n11
+  n10 -->|"9018 · 5.8 min"| n8
+  n6 -->|"7556 · 0.0 min"| n12
+  n6 -->|"45189 · 25.1 min"| n7
+  n3 -->|"52745 · 26.8 min"| n4
+  n13 -->|"7556 · 0.0 min"| n7
+  n8 -->|"5870 · 43.7 min"| n11
+  n8 -->|"961 · 7.8 min"| n10
+  n8 -->|"16130 · 76.5 min"| n9
+  n9 -->|"3303 · 0.0 min"| n14
+  n9 -->|"3634 · 36.3 min"| n11
+  n9 -->|"16017 · 37.0 min"| n6
+  n5 -->|"975 · 0.0 min"| n14
+  n5 -->|"16630 · 1.1 min"| n10
+  n5 -->|"21197 · 49.5 min"| n6
+  n5 -->|"13943 · 6.0 min"| n8
+  n4 -->|"52745 · 18.9 min"| n5
+  n2 -->|"52745 · 9.6 min"| n3
+  n2 -->|"2419 · 94.5 min"| n16
+  n1 -->|"55164 · 5.0 min"| n2
