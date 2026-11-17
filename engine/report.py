@@ -95,7 +95,7 @@ def _df_html(df, fmt="{:,.2f}"):
         h += "<tr>" + "".join(f"<td>{fmt.format(x) if isinstance(x, (float, np.floating)) and not pd.isna(x) else html.escape(str(x))}</td>" for x in r) + "</tr>"
     return h + "</tbody></table>"
 
-def build(path, name, log, classes, spec, P, val, summ, sim_logs, extra="", note=""):
+def build(path, name, log, classes, spec, P, val, summ, sim_logs, extra="", note="", node_colors=None):
     """Write the report to `path` (when given) and return the HTML. `extra`: HTML inserted after validation (the app adds its
     what-if runs); `note`: a line under the title (e.g. the run settings)."""
     tol = summ.get("tol", 0.05); terminals = set(P["terminals"])
@@ -135,7 +135,7 @@ th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}th
 <div class=tiles>{tiles}</div>
 <h2>Process map</h2><p class=muted>Start and end events of the same step are merged into one box, which shows the median and 90th percentile time in that step.
 Arrows show how many cases take that path and the average wait before the next step (amber over 15 min, red over 60 min).</p>
-<div class=map>{mermaid_html(mermaid_merged(mm))}</div>
+<div class=map>{mermaid_html(mermaid_merged(mm, node_colors=node_colors))}</div>
 <div class=wrap>{_df_html(edges.round(2))}</div>
 <h2>Queues and resources</h2><p class=muted>Average number waiting is time-weighted over the whole period. The longest queue grows with the length of the period
 (the log covers {log.t.max() / 1440:.0f} days, each simulation run fewer), so it is shown but not scored.</p>

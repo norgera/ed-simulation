@@ -146,7 +146,8 @@ def make_report(val, summ, logs, kind):
     with st.spinner("Building the report"):
         note = (f"{kind} run in the app on {datetime.datetime.now():%Y-%m-%d %H:%M}: {reps} replications × {days} days "
                 f"(+{warmup} warm-up), target ±{tol:.0%}.")
-        st.session_state[rkey] = (build_report(None, c.get("title", choice), log, classes, spec, P, val, summ, logs, note=note), note)
+        st.session_state[rkey] = (build_report(None, c.get("title", choice), log, classes, spec, P, val, summ, logs, note=note,
+                                                    node_colors=c.get("node_colors")), note)
 
 # ---------------------------------------------------------------- 1 process map
 with tab_map:
@@ -154,8 +155,45 @@ with tab_map:
          "take that path and the average wait before the next step (<b style='color:#b7791f'>amber</b> over 15 min, <b style='color:#b42318'>red</b> over 60). "
          "Zoom with + / −, double-click, or pinch; drag to pan.")
     cards([dict(label=l, value=fmt(og(k, seg, s), u)) for l, k, seg, s, u in HL])
-    mm = merged_map(log); big = len(mm["nodes"]) > 8
-    st.iframe(mermaid_html(mermaid_merged(mm), height=560 if big else 320), height=620 if big else 380)
+    # patient groups: the class label, split into its parts when case.json names them (e.g. "3-blue" -> CTAS 3, zone blue)
+    groups = {}
+    if classes is not None:
+        cl = classes.astype(str); parts = c.get("class_parts") or []
+        if parts:
+            sp_ = cl.str.split("-", n=len(parts) - 1, expand=True)
+            for i, pn in enumerate(parts): groups[pn] = sp_[i] if i in sp_ else cl
+        if len(parts) != 1: groups["class"] = cl
+    order_ = [k.lower() for k in (c.get("node_colors") or {})]      # zones in the order case.json lists them (red, yellow, blue, green)
+    def okey(x):   # numbers first (CTAS), then zones in case.json order, so "2-yellow" sorts before "3-blue"
+        x = str(x); head = x.split("-")[0]; tail = x.split("-")[-1].lower()
+        return (float(head) if head.replace(".", "", 1).isdigit() else 99, order_.index(tail) if tail in order_ else 99, x)
+    opts = ["All patients"] + [f"{g}: {v}" for g, ser in groups.items() for v in sorted(ser.dropna().unique(), key=okey)]
+    gc1, gc2 = st.columns([1, 3])
+    pick = gc1.selectbox("Show patients", opts, key=f"mapgrp_{choice}", help="Draw the map for one group of patients only.") if groups else "All patients"
+    if pick == "All patients": sub = log
+    else:
+        g_, v_ = pick.split(": ", 1); ids_ = groups[g_][groups[g_] == v_].index
+        sub = log[log.case_id.isin(ids_)]
+        gc2.markdown(f'<div class="hint" style="margin-top:34px">{sub.case_id.nunique():,} of {log.case_id.nunique():,} patients '
+                     f'({100 * sub.case_id.nunique() / log.case_id.nunique():.1f}%)</div>', unsafe_allow_html=True)
+    mm = merged_map(sub); big = len(mm["nodes"]) > 8
+    st.iframe(mermaid_html(mermaid_merged(mm, node_colors=c.get("node_colors")), height=560 if big else 320), height=620 if big else 380)
+    if groups:
+        st.markdown('<div class="panel-h">Patient groups</div>', unsafe_allow_html=True)
+        gb = st.segmented_control("Group by", list(groups), default=list(groups)[0], key=f"grpby_{choice}") or list(groups)[0]
+        g = log.groupby("case_id", sort=False)
+        ct = pd.DataFrame({"t0": g.t.first(), "t1": g.t.last(), "last": g.activity.last()})
+        ct["grp"] = groups[gb].reindex(ct.index); ct["hours"] = (ct.t1 - ct.t0) / 60
+        holds_ = [p for p in spec["pools"] if p.get("hold")]
+        reach = {p["name"]: set(log.case_id[log.activity == p["acquire"]]) for p in holds_}
+        rows = []
+        for v_, d_ in sorted(ct.groupby("grp"), key=lambda kv: okey(kv[0])):
+            r_ = {gb: v_, "patients": len(d_), "share %": 100 * len(d_) / len(ct), "time in system, avg (h)": d_.hours.mean(),
+                  "time in system, 90th pct (h)": d_.hours.quantile(.9)}
+            for q in sorted(quits): r_[f"% {q.lower()}"] = 100 * d_["last"].eq(q).mean()
+            for pn, ids_ in reach.items(): r_[f"% reaching {pn}"] = 100 * d_.index.isin(list(ids_)).mean()
+            rows.append(r_)
+        st.dataframe(pd.DataFrame(rows).round(1), hide_index=True, width="stretch")
     st.markdown('<div class="panel-h">Queues and resources in the log</div>', unsafe_allow_html=True)
     st.dataframe(pd.DataFrame([{"resource": p["name"],
                                 "capacity": str(p["capacity"]) if not p.get("shifts") else
@@ -163,7 +201,7 @@ with tab_map:
                                 "avg number waiting": og(f"queue_avg_{p['name']}"), "longest queue": og(f"queue_max_{p['name']}"),
                                 "avg wait (min)": og(f"wait_for_{p['name']}_min", s="mean"), "90th pct wait (min)": og(f"wait_for_{p['name']}_min", s="p90"),
                                 "utilization %": og(f"utilization_{p['name']}_pct")} for p in spec["pools"]]).round(1), hide_index=True, width="stretch")
-    with st.expander("Every path and its wait"):
+    with st.expander("Every path and its wait" + ("" if pick == "All patients" else f" ({pick})")):
         e = pd.DataFrame(mm["edges"]); e = e[e.n >= 0.01 * mm["n_cases"]]
         st.dataframe(e.rename(columns={"proc": "from", "next": "to", "n": "cases", "mean_wait": "avg wait (min)", "median_wait": "median wait (min)",
                                        "p90_wait": "90th pct wait (min)"}).round(1), hide_index=True, width="stretch")

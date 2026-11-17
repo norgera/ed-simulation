@@ -57,5 +57,15 @@
    "mean",
    "min"
   ]
- ]
+ ],
+ "class_parts": [
+  "CTAS",
+  "zone"
+ ],
+ "node_colors": {
+  "Red": "#f6c9c4",
+  "Yellow": "#fbe7a6",
+  "Blue": "#c9dcf5",
+  "Green": "#cdebd4"
+ }
 }

@@ -76,9 +76,9 @@ def merged_map(log, rules=None):
 def _fmt(m):
     return f"{m:.1f} min" if m < 60 else f"{m / 60:.1f} h"
 
-def mermaid_merged(mm, min_share=0.01):
+def mermaid_merged(mm, min_share=0.01, node_colors=None):
     """Mermaid flowchart: process boxes show how many cases and the median / p90 time in the process; arrows show the average
-    wait before the next step (amber over 15 minutes, red over 60)."""
+    wait before the next step (amber over 15 minutes, red over 60). node_colors: {name prefix: fill colour}, e.g. zone colours."""
     ids = {n["proc"]: f"p{i}" for i, n in enumerate(mm["nodes"])}
     out = ["flowchart LR", "  classDef proc fill:#e8f1f8,stroke:#1f5f8b,color:#10212b",
            "  classDef event fill:#ffffff,stroke:#8a9895,color:#10212b", "  classDef term fill:#f2f2f2,stroke:#555,color:#10212b"]
@@ -88,6 +88,8 @@ def mermaid_merged(mm, min_share=0.01):
         shape = ('([', '])') if a == mm["start"] else (('[[', ']]') if a in mm["terminals"] and not n["merged"] else ('[', ']'))
         out.append(f'  {i}{shape[0]}"{label}"{shape[1]}')
         out.append(f'  class {i} {"proc" if n["merged"] else ("term" if a in mm["terminals"] else "event")}')
+        for pre, fill in (node_colors or {}).items():
+            if a.lower().startswith(pre.lower()): out.append(f"  style {i} fill:{fill},stroke:#5a6865,stroke-width:2px"); break
     cut = min_share * mm["n_cases"]; k = 0
     for e in mm["edges"]:
         if e["n"] < cut: continue
